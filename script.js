@@ -12,7 +12,8 @@ require([
     layers: [
       new SceneLayer({
         popupEnabled: true,
-        portalItem: {id: "ca0470dbbddb4db28bad74ed39949e25"}
+        portalItem: {id: "ca0470dbbddb4db28bad74ed39949e25"},
+        definitionExpression: "ObjectID = 170826848 OR ObjectID = 982796108"
       })
     ]
   });
@@ -44,7 +45,11 @@ require([
 
   const daylightWidget = new Daylight({
     view: view,
-    playSpeedMultiplier: 0.75
+    playSpeedMultiplier: 0.75,
+    visibleElements: {
+      sunLightingToggle: false,
+      shadowsToggle: false
+    }
   });
 
   view.ui.add(new Expand({
@@ -52,6 +57,4 @@ require([
     view: view,
     expanded: true
   }), "top-right");
-
-  daylightWidget.viewModel.timezone = "America/New_York";
 });
