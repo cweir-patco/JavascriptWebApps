@@ -1,3 +1,19 @@
+// collapsible info panel
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.maxHeight){
+      content.style.maxHeight = null;
+    } else {
+      content.style.maxHeight = content.scrollHeight + "px";
+    } 
+  });
+}
+
 require([
 "esri/Map",
 "esri/views/SceneView",
@@ -36,9 +52,9 @@ require([
 
   view.when(function() {
     view.goTo({
-      center: [-84.39285505518536, 33.77250731345822], //bobby dodd centroid coords
+      center: [-84.39285505518536, 33.77250731345822], // bobby dodd centroid coords
       zoom: 18,
-      heading: 90, //North = 0, East = 90, South = 180, West = 270
+      heading: 90, // North = 0, East = 90, South = 180, West = 270
       tilt: 5,
     })
   });
