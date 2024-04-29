@@ -1,19 +1,24 @@
-// collapsible info panel
-var coll = document.getElementsByClassName("collapsible");
-var i;
+// splash screen
+const splash = document.querySelector('.splash');
 
-for (i = 0; i < coll.length; i++) {
-  coll[i].addEventListener("click", function() {
-    this.classList.toggle("active");
-    var content = this.nextElementSibling;
-    if (content.style.maxHeight){
-      content.style.maxHeight = null;
-    } else {
-      content.style.maxHeight = content.scrollHeight + "px";
-    } 
-  });
+// Function to hide the splash screen
+function hideSplash() {
+  splash.classList.add('display-none');
 }
 
+// Event listener for the DOMContentLoaded event
+document.addEventListener('DOMContentLoaded', () => {
+  // Add a click event listener to the document
+  document.addEventListener('click', (event) => {
+    // Check if the click occurred inside the splash screen
+    if (event.target.closest('.splash')) {
+      // Hide the splash screen when clicked
+      hideSplash();
+    }
+  });
+});
+
+// web scene
 require([
 "esri/Map",
 "esri/views/SceneView",
@@ -50,13 +55,18 @@ require([
     }
   });
 
+  const options = {
+    speedFactor: 200, // animation is 10 times faster than default
+    easing: "linear"
+  };
+
   view.when(function() {
     view.goTo({
       center: [-84.39285505518536, 33.77250731345822], // bobby dodd centroid coords
       zoom: 18,
       heading: 90, // North = 0, East = 90, South = 180, West = 270
       tilt: 5,
-    })
+    }, options)
   });
 
   const daylightWidget = new Daylight({
